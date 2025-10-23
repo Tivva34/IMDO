@@ -106,7 +106,9 @@ a:hover {
 #movie-cards-container {
     margin: 0 100px;
 }
-
+.popular-title{
+    margin-left: 70px;
+}
 /* CSS för att hantera filmkorten */
 #movie-cards-container,
 #cardContainer,
@@ -116,7 +118,7 @@ a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 20px;
+    padding:0 50px;
     justify-content: flex-start;
     align-items: flex-start;
     margin: 0 20px;
