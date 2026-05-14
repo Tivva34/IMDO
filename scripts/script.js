@@ -27,6 +27,21 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Sökformulär initierat");
 });
 
+// Visa/göm footer baserat på scroll till botten
+window.addEventListener('scroll', () => {
+    const footer = document.querySelector('.footer');
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight;
+    const winHeight = window.innerHeight;
+    const scrollPercent = (scrollTop + winHeight) / docHeight;
+    
+    if (scrollPercent > 0.9) {  // Show when 90% scrolled or more
+        footer.classList.add('show');
+    } else {
+        footer.classList.remove('show');
+    }
+});
+
 // Initiera startsidan
 async function initializeHomePage() {
     try {
@@ -100,7 +115,7 @@ async function initializeSearchPage() {
         const searchResults = await searchMovies(query);
         console.log("Hämtade sökresultat:", searchResults);
 
-        const cardContainer = document.getElementById("cardContainer");
+        const cardContainer = document.getElementById("movieContainer");
         if (!cardContainer) {
             console.error("Kortcontainer hittades inte.");
             return;

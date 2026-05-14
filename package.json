@@ -1,0 +1,18 @@
+{
+  "name": "imdo",
+  "version": "1.0.0",
+  "description": "My Movie Database - IMDO",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server"
+  },
+  "keywords": [
+    "movies",
+    "database"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

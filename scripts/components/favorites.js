@@ -47,7 +47,7 @@ export function saveToFavorites(movieData) {
 
 // Funktion för att rendera favoriter på sidan
 export function renderFavorites() {
-    const container = document.getElementById('cardContainer');
+    const container = document.getElementById('movieContainer');
     if (!container) {
         console.error("Container för favoriter hittades inte.");
         return;

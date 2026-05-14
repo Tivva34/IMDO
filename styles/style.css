@@ -24,7 +24,7 @@ h1 {
 }
 
 h2 {
-    text-align: center;
+    text-align: left;
     color: var(--primary-white);
     margin: 1rem;
 }
@@ -48,6 +48,11 @@ a:hover {
     margin: 0 auto;
 }
 
+.content-wrapper.header__flex {
+    max-width: 100%;
+    width: 100%;
+}
+
 .center {
     margin: 0 auto;
 }
@@ -67,6 +72,8 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0;
+    width: 100%;
 }
 
 .header__logo {
@@ -75,13 +82,12 @@ a:hover {
 }
 
 .header__form {
-    width: 100%;
     display: flex;
     justify-content: center;
 }
 
 .header__input {
-    width: 50%;
+    width: 40rem;
     padding: 1rem;
     border-radius: 2rem 0 0 2rem;
     border: none;
@@ -103,25 +109,84 @@ a:hover {
     cursor: pointer;
 }
 
-#movie-cards-container {
-    margin: 0 100px;
+/* Footer */
+.footer {
+    background-color: var(--header-grey);
+    width: 100%;
+    padding: 2rem 1.5rem;
+    margin-top: 3rem;
+    border-top: 1px solid var(--primary-grey);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
 }
-.popular-title{
-    margin-left: 70px;
+
+.footer.show {
+    opacity: 1;
+    pointer-events: auto;
 }
+
+.footer__flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+    flex-direction: row-reverse;
+}
+
+.footer__flex p {
+    color: var(--primary-white);
+    font-size: 0.9rem;
+}
+
+.footer__links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer__links a {
+    color: var(--text-yellow);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer__links a:hover {
+    color: var(--primary-white);
+}
+
 /* CSS för att hantera filmkorten */
 #movie-cards-container,
 #cardContainer,
-#movieContainer,
-#card-Container,
+#card-Container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
 .content-wrapper-movies {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+    box-sizing: border-box;
+}
+
+.popular-title {
+    margin-left: 0;
+    margin-bottom: 20px;
+}
+
+#movieContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding:0 50px;
     justify-content: flex-start;
     align-items: flex-start;
-    margin: 0 20px;
+    margin-bottom: 150px;
 }
 
 .movie-card {
@@ -243,8 +308,12 @@ a:hover {
     #movieContainer,
     #card-Container,
     .content-wrapper-movies {
-        justify-content: flex-start;
+        justify-content: center;
         margin: 0;
+    }
+
+    .popular-title {
+        margin-left: 8rem;
     }
 
     .movie-details-container {
@@ -264,8 +333,12 @@ a:hover {
     #movieContainer,
     #card-Container,
     .content-wrapper-movies {
-        justify-content: flex-start;
+        justify-content: center;
 
+    }
+
+    .popular-title {
+        margin-left: 5rem;
     }
 
     .movie-information p {
@@ -289,7 +362,11 @@ a:hover {
     #movieContainer,
     #card-Container,
     .content-wrapper-movies {
-        justify-content: flex-start;
+        justify-content: center;
+    }
+
+    .popular-title {
+        margin-left: 2rem;
     }
 
     .movie-information p {

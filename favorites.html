@@ -4,12 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Movie Database - Search</title>
+  <title>My Movie Database - Favorites</title>
   <link rel="stylesheet" href="./styles/style.css" />
   <script src="https://kit.fontawesome.com/f300007e95.js" crossorigin="anonymous"></script>
-  <script type="module" src="./scripts/script.js" defer></script>
-  <script type="module" src="./scripts/components/favorites.js"></script>
-
+  <script type="module" src="./scripts/script.js"></script>
 
 </head>
 
@@ -25,14 +23,24 @@
     </div>
   </header>
 
+  <!-- Favorite movies section -->
 
-  <!-- visa filmkorten som vi får från API:et -->
   <section>
     <div class="content-wrapper-movies">
-      <h2 class="search-title" id="favoritesHeader">Search Results</h2>
-      <section class="card-container" id="cardContainer"></section>
+      <h2 class="popular-title">My Favorites</h2>
+      <div id="movieContainer" class="movie-grid"></div>
     </div>
   </section>
+
+  <footer class="footer">
+    <div class="content-wrapper footer__flex">
+      <p>&copy; 2026 My Movie Database (IMDO).</p>
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="favorites.html">Favorites</a>
+      </div>
+    </div>
+  </footer>
 
 </body>
 
