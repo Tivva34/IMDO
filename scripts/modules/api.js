@@ -1,5 +1,5 @@
 const Api_Key = "301ede5"; // API-nyckel
-const Base_URL = "http://www.omdbapi.com/"; // Bas-URL för OMDB
+const Base_URL = "https://www.omdbapi.com/"; // Bas-URL för OMDB
 
 // Hämta favoritfilmer från Jespers API
 export function fetchFavoriteMovies() {
