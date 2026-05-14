@@ -27,21 +27,32 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Sökformulär initierat");
 });
 
-// Visa/göm footer baserat på scroll till botten
+// Show/hide footer based on scroll position at bottom of page
 window.addEventListener('scroll', () => {
     const footer = document.querySelector('.footer');
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight;
     const winHeight = window.innerHeight;
-    const scrollPercent = (scrollTop + winHeight) / docHeight;
     
-    // Show when 75% scrolled or more
-    if (scrollPercent > 0.75) {
+    // Show footer only when near bottom (within 200px of bottom)
+    if (scrollTop + winHeight >= docHeight - 200) {
         footer.classList.add('show');
     } else {
         footer.classList.remove('show');
     }
 });
+
+// Check on page load - show immediately if page has little scrollable content
+setTimeout(() => {
+    const footer = document.querySelector('.footer');
+    const docHeight = document.documentElement.scrollHeight;
+    const winHeight = window.innerHeight;
+    
+    // Only show immediately if scrollable height is very small (less than 1.5x window)
+    if (docHeight < winHeight * 1.5) {
+        footer.classList.add('show');
+    }
+}, 800);
 
 // Initiera startsidan
 async function initializeHomePage() {
