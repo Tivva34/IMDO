@@ -57,7 +57,7 @@ export function renderFavorites() {
 
     const favorites = getFavoritesFromStorage();
     if (favorites.length === 0) {
-        container.innerHTML = "<p>Inga favoritfilmer än.</p>";
+        container.innerHTML = "<p>No favorite movies yet.</p>";
         console.log("Inga favoritfilmer att visa.");
         return;
     }
