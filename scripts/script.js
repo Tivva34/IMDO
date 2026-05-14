@@ -35,7 +35,8 @@ window.addEventListener('scroll', () => {
     const winHeight = window.innerHeight;
     const scrollPercent = (scrollTop + winHeight) / docHeight;
     
-    if (scrollPercent > 0.9) {  // Show when 90% scrolled or more
+    // Show when 75% scrolled or more
+    if (scrollPercent > 0.75) {
         footer.classList.add('show');
     } else {
         footer.classList.remove('show');
