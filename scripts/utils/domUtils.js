@@ -17,14 +17,40 @@ export function renderMovieDetails(movie) {
     }
 
     movieDetailsContainer.innerHTML = `
-        <h2>${movie.Title}</h2>
-        <img src="${movie.Poster}" alt="${movie.Title}">
-        <p><strong>Handling:</strong> ${movie.Plot}</p>
-        <p><strong>År:</strong> ${movie.Year}</p>
-        <p><strong>Genre:</strong> ${movie.Genre}</p>
-        <p><strong>Regissör:</strong> ${movie.Director}</p>
-        <p><strong>Skådespelare:</strong> ${movie.Actors}</p>
-        <p><strong>IMDB Betyg:</strong> ${movie.imdbRating}</p>
+        <div class="movie-details-wrapper">
+            <div class="movie-details-image">
+                <img src="${movie.Poster}" alt="${movie.Title}">
+            </div>
+            <div class="movie-details-info">
+                <h2>${movie.Title}</h2>
+                <div class="movie-details-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">År</span>
+                        <span class="meta-value">${movie.Year}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">IMDB Betyg</span>
+                        <span class="meta-value">${movie.imdbRating}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Genre</span>
+                        <span class="meta-value">${movie.Genre}</span>
+                    </div>
+                </div>
+                <div class="movie-details-content-section">
+                    <h3>Handling</h3>
+                    <p>${movie.Plot}</p>
+                </div>
+                <div class="movie-details-content-section">
+                    <h3>Regissör</h3>
+                    <p>${movie.Director}</p>
+                </div>
+                <div class="movie-details-content-section">
+                    <h3>Skådespelare</h3>
+                    <p>${movie.Actors}</p>
+                </div>
+            </div>
+        </div>
     `;
 }
 

@@ -16,15 +16,25 @@
       <a href="index.html"><img class="header__logo" src="./res/logo.png" alt="logotype" /></a>
       <form class="header__form" id="searchForm">
         <input class="header__input" id="searchInput" type="text" aria-label="Search" />
-        <button type="submit" class="header__form-btn" id="searchBtn">Search</button>
+        <button type="submit" class="header__form-btn" id="searchBtn"><i class="fas fa-search"></i><span class="search-text">Search</span></button>
       </form>
-      <a href="./favorites.html" class="header__fav-btn" id="favBtn">Favorites</a>
+      <a href="./favorites.html" class="header__fav-btn" id="favBtn"><i class="fas fa-star"></i><span class="fav-text">Favorites</span></a>
     </div>
   </header>
 
-  <section class="movie-details-section">
+  <section class="movie-details-page">
     <div class="content-wrapper movie-details-container" id="movieDetails"></div>
   </section>
+
+  <footer class="footer">
+    <div class="content-wrapper footer__flex">
+      <p>© 2026 My Movie Database (IMDO).</p>
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="favorites.html">Favorites</a>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
