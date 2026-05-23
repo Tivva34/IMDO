@@ -420,7 +420,7 @@ a:hover {
     }
 
     .header__form {
-        order: 3;
+        order: 2;
         flex-basis: auto;
         max-width: auto;
         margin: 0;
@@ -428,7 +428,7 @@ a:hover {
     }
 
     .header__fav-btn {
-        order: 2;
+        order: 3;
     }
 
     #movieContainer {
@@ -477,6 +477,110 @@ a:hover {
     }
 }
 
+@media (max-width: 700px) {
+
+    .header {
+        padding: 0.8rem;
+        position: relative;
+    }
+
+    .header__flex {
+        flex-wrap: nowrap;
+        gap: 8px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header__logo {
+        width: 90px;
+        order: 1;
+        flex-shrink: 0;
+    }
+
+    .header__form {
+        order: 2;
+        flex: 0;
+        max-width: none;
+        margin: 0 1rem 0 auto;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .header__form.active {
+        position: fixed;
+        left: calc(50% + 2rem);
+        top: 0.8rem;
+        transform: translateX(-50%);
+        margin: 0;
+        width: auto;
+        z-index: 998;
+        display: flex;
+        align-items: center;
+    }
+
+    .header__input {
+        font-size: 0.9rem;
+        padding: 0.75rem;
+        display: none;
+        border-radius: 2rem 0 0 2rem;
+        width: 0;
+        transition: width 0.3s ease;
+    }
+
+    .header__input.active {
+        display: block;
+        width: 150px;
+    }
+
+    .header__form-btn {
+        font-size: 1.5rem;
+        min-width: 40px;
+        width: 40px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+        background: none;
+        border: none;
+        color: var(--text-yellow);
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 999;
+        order: 2;
+    }
+
+    .header__form.active .header__form-btn {
+        position: relative;
+        right: auto;
+        top: auto;
+        margin: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 0 2rem 2rem 0;
+        background-color: var(--primary-grey);
+        color: var(--primary-white);
+    }
+
+    .header__fav-btn {
+        order: 3;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        margin-left: 1rem;
+    }
+
+    .search-text,
+    .fav-text {
+        display: none;
+    }
+
+}
+
 @media (max-width: 600px) {
 
     .header {
@@ -511,7 +615,7 @@ a:hover {
 
     .header__form.active {
         position: fixed;
-        left: calc(50% + 1rem);
+        left: calc(50% + 2rem);
         top: 0.8rem;
         transform: translateX(-50%);
         margin: 0;
@@ -532,7 +636,7 @@ a:hover {
 
     .header__input.active {
         display: block;
-        width: 200px;
+        width: 150px;
     }
 
     .header__form-btn {
