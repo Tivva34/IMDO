@@ -22,8 +22,6 @@ IMDO is a school assignment where I built a movie browsing web app inspired by I
 - localStorage
 - Live Server
 
----
-
 ## Installation
 
 Clone the repository:
@@ -44,9 +42,8 @@ npm run dev
 
 The app will open with Live Server.
 
----
 
-##How It Works
+## How It Works
 
 The app uses JavaScript modules to separate functionality into smaller files. API functions handle movie data, components create reusable movie cards, and utility files help render content to the page.
 
