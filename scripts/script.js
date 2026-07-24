@@ -92,7 +92,7 @@ async function initializeHomePage() {
 
 // Initiera favoritsidan
 async function initializeFavoritesPage() {
-    // Liknande logik som initializeHomePage
+    renderFavorites();
 }
 
 // Initiera filmsidan

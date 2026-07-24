@@ -1,94 +1,51 @@
-console.log("favorites.js är laddad!");
-
-// Funktion för att hämta favoriter från localStorage
 function getFavoritesFromStorage() {
-    const favorites = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-    console.log("Hämtade favoriter från localStorage:", favorites);
-    return favorites;
+    try {
+        const favorites = JSON.parse(localStorage.getItem('favoriteMovies'));
+        return Array.isArray(favorites) ? favorites : [];
+    } catch {
+        return [];
+    }
 }
 
-// Funktion för att spara uppdaterade favoriter till localStorage
 function saveFavoritesToStorage(favorites) {
-    localStorage.setItem("favoriteMovies", JSON.stringify(favorites));
-    console.log("Sparade favoriter till localStorage:", favorites);
+    localStorage.setItem('favoriteMovies', JSON.stringify(favorites));
 }
 
-// Funktion för att spara eller ta bort film från favoriter
+export function isMovieFavorite(imdbID) {
+    return getFavoritesFromStorage().some(movie => movie.imdbID === imdbID);
+}
+
 export function saveToFavorites(movieData) {
-    let favorites = getFavoritesFromStorage();
-
-    const movieToSave = {
-        Title: movieData.Title,
-        Year: movieData.Year,
-        imdbID: movieData.imdbID,
-        Poster: movieData.Poster,
-        Plot: movieData.Plot
-    };
-
-    const movieIndex = favorites.findIndex(fav => fav.imdbID === movieToSave.imdbID);
-    const favoriteButton = document.querySelector(`#movie-${movieToSave.imdbID} .favorite-btn`);
-
-    if (movieIndex === -1) {
-        favorites.push(movieToSave);
-        if (favoriteButton) {
-            favoriteButton.classList.add('filled');
-        }
-        console.log("Lade till film i favoriter:", movieToSave);
-    } else {
-        favorites.splice(movieIndex, 1);
-        if (favoriteButton) {
-            favoriteButton.classList.remove('filled');
-        }
-        console.log("Tog bort film från favoriter:", movieToSave);
-    }
-
-    saveFavoritesToStorage(favorites);
-}
-
-// Funktion för att rendera favoriter på sidan
-export function renderFavorites() {
-    const container = document.getElementById('movieContainer');
-    if (!container) {
-        console.error("Container för favoriter hittades inte.");
-        return;
-    }
-
-    container.innerHTML = '';  // Rensa tidigare innehåll
-
     const favorites = getFavoritesFromStorage();
-    if (favorites.length === 0) {
-        container.innerHTML = "<p>No favorite movies yet.</p>";
-        console.log("Inga favoritfilmer att visa.");
-        return;
+
+    if (!isMovieFavorite(movieData.imdbID)) {
+        favorites.push({
+            Title: movieData.Title,
+            Year: movieData.Year,
+            imdbID: movieData.imdbID,
+            Poster: movieData.Poster,
+            Plot: movieData.Plot
+        });
+        saveFavoritesToStorage(favorites);
+    }
+}
+
+export function removeFromFavorites(imdbID) {
+    const favorites = getFavoritesFromStorage().filter(movie => movie.imdbID !== imdbID);
+    saveFavoritesToStorage(favorites);
+}
+
+// Returns the favorite state after the click: true means added, false means removed.
+export function toggleFavorite(movieData) {
+    if (isMovieFavorite(movieData.imdbID)) {
+        removeFromFavorites(movieData.imdbID);
+        return false;
     }
 
-    favorites.forEach(movieData => {
-        const card = createFavoriteCard(movieData);
-        container.appendChild(card);
-    });
-
-    console.log("Renderade favoriter:", favorites);
-
-    container.addEventListener('click', (event) => {
-        if (event.target && event.target.closest('.favorite-btn')) {
-            const card = event.target.closest('.movie-card');
-            const imdbID = card.getAttribute('data-imdbid');
-            removeFromFavorites(imdbID);  // Ta bort från favoriter
-            card.remove();  // Ta bort kort från DOM
-            console.log("Tog bort film från DOM och favoriter:", imdbID);
-        }
-    });
+    saveToFavorites(movieData);
+    return true;
 }
 
-// Funktion för att ta bort film från favoriter
-export function removeFromFavorites(imdbID) {
-    let favorites = getFavoritesFromStorage();
-    favorites = favorites.filter(movie => movie.imdbID !== imdbID);
-    saveFavoritesToStorage(favorites);
-    console.log("Tog bort film från favoriter:", imdbID);
-}
-
-// Funktion för att skapa kort för favoriter
 export function createFavoriteCard(movieData) {
     const card = document.createElement('div');
     card.classList.add('movie-card');
@@ -97,44 +54,42 @@ export function createFavoriteCard(movieData) {
     card.innerHTML = `
         <img src="${movieData.Poster}" alt="${movieData.Title}" class="movie-poster">
         <h3>${movieData.Title}</h3>
-        <button class="favorite-btn filled" aria-label="Remove ${movieData.Title} from favorites"><i class="fa fa-star"></i></button>
+        <button type="button" class="favorite-btn filled" aria-label="Remove ${movieData.Title} from favorites" aria-pressed="true"><span aria-hidden="true">★</span></button>
     `;
 
-    // Lägg till klickhändelse för att navigera till movie.html
-    card.addEventListener('click', (event) => {
-        if (!event.target.closest('.favorite-btn')) {
-            window.location.href = `movie.html?id=${movieData.imdbID}`;
-        }
+    card.querySelector('.favorite-btn').addEventListener('click', event => {
+        event.stopPropagation();
+        removeFromFavorites(movieData.imdbID);
+        renderFavorites();
     });
 
-    console.log("Skapade favoritkort för film:", movieData);
+    card.addEventListener('click', () => {
+        window.location.href = `movie.html?id=${movieData.imdbID}`;
+    });
 
     return card;
 }
 
-// Rendera favoriter om användaren är på favoritsidan
-if (window.location.pathname.includes('favorites.html')) {
-    window.onload = renderFavorites;
-}
+export function renderFavorites() {
+    const container = document.getElementById('movieContainer');
+    if (!container) return;
 
-// Uppdatera favoritknappens status beroende på om filmen är i favoriter
-export function updateFavoriteButtonStatus(movie) {
-    const favoriteButton = document.querySelector(`#movie-${movie.imdbID} .favorite-btn`);
-    if (favoriteButton) {
-        if (isMovieFavorite(movie.imdbID)) {
-            favoriteButton.classList.add('filled');
-            console.log("Film är favorit, fyllde stjärna:", movie.imdbID);
-        } else {
-            favoriteButton.classList.remove('filled');
-            console.log("Film är inte favorit, tömde stjärna:", movie.imdbID);
-        }
+    const favorites = getFavoritesFromStorage();
+    container.innerHTML = '';
+
+    if (favorites.length === 0) {
+        container.innerHTML = '<p class="no-favorites">No favorite movies yet.</p>';
+        return;
     }
+
+    favorites.forEach(movieData => container.appendChild(createFavoriteCard(movieData)));
 }
 
-// Kontrollera om filmen är en favorit
-export function isMovieFavorite(imdbID) {
-    const favorites = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-    const isFavorite = favorites.some(movie => movie.imdbID === imdbID);
-    console.log("Kontrollerade om film är favorit:", imdbID, isFavorite);
-    return isFavorite;
+export function updateFavoriteButtonStatus(movie) {
+    const button = document.querySelector(`[data-imdbid="${movie.imdbID}"] .favorite-btn`);
+    if (!button) return;
+
+    const isFavorite = isMovieFavorite(movie.imdbID);
+    button.classList.toggle('filled', isFavorite);
+    button.setAttribute('aria-pressed', String(isFavorite));
 }

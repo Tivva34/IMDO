@@ -20,7 +20,7 @@
 h1 {
     color: white;
     margin: 1rem;
-    font-size: 2rem;
+    font-size: 2.4rem;
 }
 
 h2 {
@@ -124,6 +124,14 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.header__fav-btn > span:first-child {
+    display: none;
+}
+
+.header__form-btn > span:first-child {
+    display: none;
 }
 
 .search-text,
@@ -249,13 +257,15 @@ a:hover {
 /* Stjärnknapp som ligger i övre högra hörnet */
 .favorite-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 4px;
+    right: 4px;
     background: none;
     border: none;
     cursor: pointer;
     font-size: 2rem;
     color: var(--primary-white);
+    line-height: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
     transition: transform 0.3s ease, color 0.3s ease;
     z-index: 1;
 }
@@ -804,5 +814,80 @@ a:hover {
 
     .header__fav-btn {
         font-size: 1.3rem;
+    }
+}
+
+/* Compact mobile header: logo, visible search field, then favorites star. */
+@media (max-width: 700px) {
+    .header {
+        padding: 0.6rem;
+    }
+
+    .header__flex {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+    }
+
+    .header__logo {
+        width: 72px;
+        flex-shrink: 0;
+    }
+
+    .header__form,
+    .header__form.active {
+        position: static;
+        transform: none;
+        display: flex;
+        flex: 0 1 clamp(130px, 45vw, 180px);
+        width: clamp(130px, 45vw, 180px);
+        min-width: 0;
+        margin: 0;
+    }
+
+    .header__input,
+    .header__input.active {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        padding: 0.55rem 0.7rem;
+        font-size: 0.8rem;
+        border-radius: 1.25rem 0 0 1.25rem;
+    }
+
+    .header__form-btn,
+    .header__form.active .header__form-btn {
+        width: 34px;
+        min-width: 34px;
+        height: 36px;
+        padding: 0;
+        border-radius: 0 1.25rem 1.25rem 0;
+        background-color: var(--primary-grey);
+        color: var(--primary-white);
+        font-size: 1rem;
+    }
+
+    .header__form-btn:hover {
+        background-color: var(--primary-grey);
+        color: var(--primary-white);
+    }
+
+    .header__fav-btn {
+        margin-left: 0;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .header__fav-btn > span:first-child {
+        display: inline;
+    }
+
+    .header__form-btn > span:first-child {
+        display: inline;
+    }
+
+    .search-text,
+    .fav-text {
+        display: none;
     }
 }

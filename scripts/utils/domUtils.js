@@ -65,44 +65,7 @@ export function initSearchForm() {
         return;
     }
 
-    let searchBarOpen = false;
-
-    // Handle Enter key in search input - perform search
-    searchInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
-            }
-        }
-    });
-
-    // Handle button click - toggle search bar on mobile
-    searchBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        if (window.innerWidth <= 600) {
-            searchBarOpen = !searchBarOpen;
-            
-            if (searchBarOpen) {
-                // Open search bar - center it
-                searchInput.classList.add('active');
-                searchBtn.classList.add('close-btn');
-                searchForm.classList.add('active');
-                searchInput.focus();
-            } else {
-                // Close search bar
-                searchInput.classList.remove('active');
-                searchBtn.classList.remove('close-btn');
-                searchForm.classList.remove('active');
-                searchInput.value = '';
-            }
-        }
-    });
-
-    // Handle form submission (fallback)
+    // The same compact, always-visible form is used on every screen size.
     searchForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const query = searchInput.value.trim();
@@ -111,23 +74,4 @@ export function initSearchForm() {
         }
     });
 
-    // Close search bar when input loses focus (only if bar was open and input is empty)
-    searchInput.addEventListener('blur', () => {
-        if (window.innerWidth <= 600 && searchBarOpen && !searchInput.value.trim()) {
-            searchBarOpen = false;
-            searchInput.classList.remove('active');
-            searchBtn.classList.remove('close-btn');
-            searchForm.classList.remove('active');
-        }
-    });
-
-    // Handle window resize to adapt to screen size changes
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 600 && searchBarOpen) {
-            searchBarOpen = false;
-            searchInput.classList.remove('active');
-            searchBtn.classList.remove('close-btn');
-            searchForm.classList.remove('active');
-        }
-    });
 }
